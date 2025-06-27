@@ -99,14 +99,8 @@ npm run dev
 
 Deploy using:
 
-* [Render](https://www.render.com) (preferred for backend)
-* Or use [Railway](https://railway.app)
-
----
-
-## 📄 License
-
-This project is part of an assessment and is intended for **educational purposes only**. You agree to open-source the code and **not use the company’s name** anywhere in the project.
+* [Render](https://backend-rest-res.onrender.com) (preferred for backend)
+  
 
 ---
 
@@ -115,7 +109,6 @@ This project is part of an assessment and is intended for **educational purposes
 **Your Name**
 
 * [GitHub](https://github.com/your-github-username)
-* [Portfolio](https://your-portfolio.com)
 
 ---
 
