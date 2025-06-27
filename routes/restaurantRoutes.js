@@ -6,13 +6,14 @@ const {
   createRestaurant,
   checkAvailability,
 } = require('../controllers/restaurantController');
+const { protect, admin } = require('../middleware/authMiddleware');
 
 // Public routes
 router.get('/', getRestaurants);
 router.get('/:id', getRestaurantById);
 router.get('/:id/availability', checkAvailability);
 
-// In a real application, this would be protected by admin middleware
-router.post('/', createRestaurant);
+// POST /api/restaurants - Create restaurant (Admin only)
+router.post('/', protect, admin, createRestaurant);
 
 module.exports = router;

@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const {
@@ -6,23 +5,21 @@ const {
   getUserReservations,
   cancelReservation,
   getAllReservations,
+  checkAvailability,
+  getDailyAvailability
 } = require('../controllers/reservationController');
-const { protect, admin } = require('../middleware/authMiddleware'); // assume both protect and admin are exported here
+const { protect, admin } = require('../middleware/authMiddleware');
 
-// Protect all routes below
-router.use(protect);
+// Public routes
+router.get('/check', checkAvailability);           // Check a specific time slot
+router.get('/slots', getDailyAvailability);        // Get all availability for a given date
 
-// POST /api/reservations - create a reservation
-// GET  /api/reservations    - get current user's reservations
-router.route('/')
-  .post(createReservation)
-  .get(getUserReservations);
+// Protected user routes
+router.post('/', protect, createReservation);      // Create a reservation
+router.get('/', protect, getUserReservations);     // Get reservations of the logged-in user
+router.delete('/:id', protect, cancelReservation); // Cancel a reservation
 
-// DELETE /api/reservations/:id - cancel a reservation
-router.delete('/:id', cancelReservation);
-
-// Admin-only route to fetch all reservations
-// GET /api/reservations/all
-router.get('/all', admin, getAllReservations);
+// Admin-only route
+router.get('/all', protect, admin, getAllReservations); // Get all reservations (admin only)
 
 module.exports = router;
